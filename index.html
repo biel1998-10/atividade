@@ -5,44 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AACRRI</title>
-   </head>
-<body>
-    <header>
-        <div><strong>AACRRI</strong></div>
-        <ul class="navlist">
-            <li><a href="#inicio">Início</a></li>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#podcast">Podcast</a></li>
-        </ul>
-    </header>
-
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Associação de Agentes Ambientais e Catadores de Materiais Reutilizáveis e Recicláveis</h1>
-        </div>
-    </section>
-
-    
-    <section class="section" id="inicio">
-        <h2>Tipos de Coletas</h2>
-        <div class="cards">
-            <div class="card">Trabalho com a comunidade Itabunense para conscientização do descarte correto de recicláveis.</div>
-            <div class="card">Coleta junto aos comerciantes e instituições locais.</div>
-            <div class="card">Transporte dos materiais acondicionados para o galpão.</div>
-            <div class="card">Separação no galpão por categorias e destinação correta de rejeitos.</div>
-        </div>
-    </section>
-
-    <section class="impact-section">
-        <h2>Nosso Impacto</h2>
-        <div class="impact-stats">
-            <div>+12 toneladas recicladas/mês</div>
-            <div>+40 famílias beneficiadas</div>
-            <div>+15 empresas parceiras</div>
-            <div>+20 escolas atendidas</div>
-        </div>
-    </section>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         * {
             margin: 0;
@@ -57,7 +20,7 @@
             line-height: 1.6;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1, h2, h3 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -205,15 +168,10 @@
             font-weight: bold;
         }
 
-        .image-banner {
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        .image-banner img {
-            max-width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        #map {
+            height: 600px;
+            width: 100%;
+            margin-top: 30px;
         }
 
         @media (max-width: 768px) {
@@ -248,8 +206,42 @@
     </style>
 </head>
 <body>
+
     <header>
-        <div
+        <div><strong>AACRRI</strong></div>
+        <ul class="navlist">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#podcast">Podcast</a></li>
+            <li><a href="#mapa">Mapa</a></li>
+        </ul>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Associação de Agentes Ambientais e Catadores de Materiais Reutilizáveis e Recicláveis</h1>
+        </div>
+    </section>
+
+    <section class="section" id="inicio">
+        <h2>Tipos de Coletas</h2>
+        <div class="cards">
+            <div class="card">Trabalho com a comunidade Itabunense para conscientização do descarte correto de recicláveis.</div>
+            <div class="card">Coleta junto aos comerciantes e instituições locais.</div>
+            <div class="card">Transporte dos materiais acondicionados para o galpão.</div>
+            <div class="card">Separação no galpão por categorias e destinação correta de rejeitos.</div>
+        </div>
+    </section>
+
+    <section class="impact-section">
+        <h2>Nosso Impacto</h2>
+        <div class="impact-stats">
+            <div>+12 toneladas recicladas/mês</div>
+            <div>+40 famílias beneficiadas</div>
+            <div>+15 empresas parceiras</div>
+            <div>+20 escolas atendidas</div>
+        </div>
+    </section>
 
     <section class="section" id="sobre">
         <h2>Podcast: Coleta Seletiva</h2>
@@ -261,41 +253,60 @@
         </div>
     </section>
 
+    <section class="podcast-section" id="podcast">
+        <h2>Sustentabilidade e Inclusão</h2>
+        <p>Promovendo sustentabilidade, inclusão social e consciência ambiental através da coleta seletiva e da educação comunitária.</p>
 
+        <div class="video-section">
+            <h3>Assista ao POD RECICLAR</h3>
+            <iframe 
+                src="https://www.youtube.com/embed/XwqwRpGHhCA?si=XKg70ZkP-7sgsbc6" 
+                title="YouTube video player" 
+                allowfullscreen>
+            </iframe>
 
-    
-<section class="podcast-section" id="podcast">
-    <h2>Sustentabilidade e Inclusão</h2> <!-- título -->
-    <p>Promovendo sustentabilidade, inclusão social e consciência ambiental através da coleta seletiva e da educação comunitária.</p>
-
-    <div class="video-section">
-        <h3>Assista ao PODRECICLAR</h3>
-
-        <iframe 
-            src="https://www.youtube.com/embed/XwqwRpGHhCA?si=XKg70ZkP-7sgsbc6" 
-            title="YouTube video player" 
-            allowfullscreen>
-        </iframe>
-
-        <div class="video-buttons">
-            <a href="https://www.youtube.com/watch?v=XwqwRpGHhCA" target="_blank">
-                <button class="button">Assistir no YouTube</button>
-            </a>
-
-            <!-- Botão de download estilizado como botão, sem abrir nova aba -->
-            <a href="video/video.mp4" download
-               style="display: inline-block; background-color: #203e1e; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
-                <h3>Baixar vídeo</h3>
-
-            </a>
+            <div class="video-buttons">
+                <a href="https://www.youtube.com/watch?v=XwqwRpGHhCA" target="_blank">
+                    <button class="button">Assistir no YouTube</button>
+                </a>
+                <a href="video/video.mp4" download
+                   style="display: inline-block; background-color: #203e1e; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                    Baixar vídeo
+                </a>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <section class="section" id="mapa">
+        <h2>Localização das Atividades do AACRRI </h2>
+        <div id="map"></div>
+    </section>
 
-            
     <footer class="footer">
         © 2025 AACRRI. Todos os direitos reservados.
     </footer>
+
+    <!-- Scripts do Leaflet -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([-14.800, -39.270], 13); // Centro aproximado dos pontos
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Coordenada Selecionada
+        L.marker([-14.806842, -39.292303]).addTo(map)
+            .bindPopup('Ponto Central: Coordenada Selecionada')
+            .openPopup();
+
+        // Local 1
+        L.marker([-14.8127737, -39.3028134]).addTo(map)
+            .bindPopup(' Ponto de Coleta');
+
+        // Local 2
+        L.marker([-14.7904479, -39.2187136]).addTo(map)
+            .bindPopup(' Comunidade Atendida');
+    </script>
 </body>
 </html>
