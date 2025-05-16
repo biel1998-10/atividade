@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AACRRI</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
@@ -20,7 +20,9 @@
             line-height: 1.6;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -60,7 +62,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #7DA63F;
+            background-color: #7da63f;
             padding: 60px 20px;
         }
 
@@ -99,11 +101,13 @@
             transform: translateY(-5px);
         }
 
-        .audio-section, .video-section {
+        .audio-section,
+        .video-section {
             margin-top: 30px;
         }
 
-        audio, iframe {
+        audio,
+        iframe {
             width: 90%;
             max-width: 500px;
             border-radius: 8px;
@@ -134,7 +138,7 @@
 
         .button {
             padding: 10px 20px;
-            background-color: #7DA63F;
+            background-color: #7da63f;
             color: white;
             border: none;
             border-radius: 5px;
@@ -174,6 +178,23 @@
             margin-top: 30px;
         }
 
+        /* CENTRALIZAR OS BOTÕES DO MAPA */
+        #map-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+            gap: 10px;
+        }
+
+        /* Ajuste para diminuir distância do título Podcast para o áudio */
+        #sobre h2 {
+            margin-bottom: 10px;
+        }
+
+        #sobre .audio-section {
+            margin-top: 5px;
+        }
+
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -206,7 +227,6 @@
     </style>
 </head>
 <body>
-
     <header>
         <div><strong>AACRRI</strong></div>
         <ul class="navlist">
@@ -247,7 +267,7 @@
         <h2>Podcast: Coleta Seletiva</h2>
         <div class="audio-section">
             <audio controls>
-                <source src="https://raw.githubusercontent.com/mandarimdollar/site-recicle/refs/heads/main/Coleta-seletiva-de-residuos%20(3).mp3" type="audio/mp3">
+                <source src="https://raw.githubusercontent.com/mandarimdollar/site-recicle/refs/heads/main/Coleta-seletiva-de-residuos%20(3).mp3" type="audio/mp3" />
                 Seu navegador não suporta o elemento de áudio.
             </audio>
         </div>
@@ -259,54 +279,93 @@
 
         <div class="video-section">
             <h3>Assista ao POD RECICLAR</h3>
-            <iframe 
-                src="https://www.youtube.com/embed/XwqwRpGHhCA?si=XKg70ZkP-7sgsbc6" 
-                title="YouTube video player" 
-                allowfullscreen>
-            </iframe>
+            <iframe
+                src="https://www.youtube.com/embed/XwqwRpGHhCA?si=XKg70ZkP-7sgsbc6"
+                title="YouTube video player"
+                allowfullscreen
+            ></iframe>
 
             <div class="video-buttons">
                 <a href="https://www.youtube.com/watch?v=XwqwRpGHhCA" target="_blank">
                     <button class="button">Assistir no YouTube</button>
                 </a>
-                <a href="video/video.mp4" download
-                   style="display: inline-block; background-color: #203e1e; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
-                    Baixar vídeo
-                </a>
+                <a
+                    href="video/video.mp4"
+                    download
+                    style="display: inline-block; background-color: #203e1e; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;"
+                    >Baixar vídeo</a
+                >
             </div>
         </div>
     </section>
 
-    <section class="section" id="mapa">
-        <h2>Localização das Atividades do AACRRI </h2>
+    <section id="mapa">
+        <h2>Localização das Atividades do AACRRI</h2>
+        <div id="map-buttons">
+            <button class="button" onclick="mostrarPonto('central')">Ponto Central</button>
+            <button class="button" onclick="mostrarPonto('coleta')">Ponto de Coleta</button>
+            <button class="button" onclick="mostrarPonto('comunidade')">Comunidade Atendida</button>
+        </div>
         <div id="map"></div>
     </section>
 
-    <footer class="footer">
+    <footer>
         © 2025 AACRRI. Todos os direitos reservados.
     </footer>
 
-    <!-- Scripts do Leaflet -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        const map = L.map('map').setView([-14.800, -39.270], 13); // Centro aproximado dos pontos
+        const map = L.map('map').setView([-15, -60], 3); // América do Sul
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
+        // Camada de imagem de satélite bonita (Esri)
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution:
+                '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, etc.',
         }).addTo(map);
 
-        // Coordenada Selecionada
-        L.marker([-14.806842, -39.292303]).addTo(map)
-            .bindPopup('Ponto Central: Coordenada Selecionada')
-            .openPopup();
+        let marcadorAtual = null;
 
-        // Local 1
-        L.marker([-14.8127737, -39.3028134]).addTo(map)
-            .bindPopup(' Ponto de Coleta');
+        const pontos = {
+            central: {
+                coords: [-14.806842, -39.292303],
+                popup: 'Ponto Central: Coordenada Selecionada',
+            },
+            coleta: {
+                coords: [-14.8127737, -39.3028134],
+                popup: 'Ponto de Coleta',
+            },
+            comunidade: {
+                coords: [-14.7904479, -39.2187136],
+                popup: 'Comunidade Atendida',
+            },
+        };
 
-        // Local 2
-        L.marker([-14.7904479, -39.2187136]).addTo(map)
-            .bindPopup(' Comunidade Atendida');
+        function animarMarcador(marker) {
+            const el = marker._icon;
+            if (el) {
+                el.classList.add('pulse');
+                setTimeout(() => el.classList.remove('pulse'), 700);
+            }
+        }
+
+        function mostrarPonto(tipo) {
+            if (marcadorAtual) {
+                map.removeLayer(marcadorAtual);
+            }
+
+            const { coords, popup } = pontos[tipo];
+            marcadorAtual = L.marker(coords).addTo(map).bindPopup(popup);
+
+            // Primeiro volta para América do Sul (zoom global)
+            map.flyTo([-15, -60], 3, { duration: 2 });
+
+            // Depois de 2 segundos, foca no ponto
+            setTimeout(() => {
+                map.flyTo(coords, 16, { duration: 2 });
+                marcadorAtual.openPopup();
+                animarMarcador(marcadorAtual);
+            }, 2000);
+        }
     </script>
 </body>
 </html>
